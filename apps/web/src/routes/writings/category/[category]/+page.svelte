@@ -15,9 +15,15 @@
 	<h1>writings</h1>
 
 	<div class="flex flex-wrap gap-2 mt-4">
-		{#each data.categories as category}
-			<a href="/writings/category/{category}" class="text-sm text-gray-600 hover:underline">[{category}]</a>
+		{#each data.categories as cat}
+			<a
+				href="/writings/category/{cat}"
+				class="text-sm hover:underline"
+				class:text-gray-600={cat !== data.category}
+				class:font-semibold={cat === data.category}
+			>[{cat}]</a>
 		{/each}
+		<a href="/writings" class="text-sm text-gray-600 hover:underline">[all]</a>
 	</div>
 
 	<ul class="space-y-6 mt-6">
