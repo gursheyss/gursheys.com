@@ -1,0 +1,15 @@
+{
+	"name": "gursheys.com",
+	"private": true,
+	"packageManager": "bun@1.3.3",
+	"workspaces": ["apps/*", "packages/*"],
+	"scripts": {
+		"dev": "turbo run dev",
+		"build": "turbo run build",
+		"check": "turbo run check",
+		"preview": "turbo run preview"
+	},
+	"devDependencies": {
+		"turbo": "^2.3.0"
+	}
+}

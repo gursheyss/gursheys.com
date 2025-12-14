@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+	--font-serif: 'EB Garamond Variable', serif;
+}
+
+body {
+	font-family: var(--font-serif);
+}
