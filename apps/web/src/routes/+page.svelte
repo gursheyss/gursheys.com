@@ -30,6 +30,7 @@
 	{#if isDesktop}
 		<FloatingBlocks
 			posts={data.posts}
+			logs={data.logs}
 			categories={data.categories}
 			tracks={data.tracks}
 			musicError={data.musicError}
@@ -37,6 +38,7 @@
 	{:else}
 		<MobileNav
 			posts={data.posts}
+			logs={data.logs}
 			categories={data.categories}
 			tracks={data.tracks}
 			musicError={data.musicError}

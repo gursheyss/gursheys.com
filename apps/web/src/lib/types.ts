@@ -4,6 +4,7 @@ export type Post = {
 	date: Date;
 	summary: string;
 	categories: string[];
+	html?: string;
 };
 
 export type Track = {

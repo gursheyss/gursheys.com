@@ -3,17 +3,19 @@
 	import AboutBlock from './blocks/AboutBlock.svelte';
 	import MusicBlock from './blocks/MusicBlock.svelte';
 	import WritingsBlock from './blocks/WritingsBlock.svelte';
+	import LogsBlock from './blocks/LogsBlock.svelte';
 	import BeforeBlock from './blocks/BeforeBlock.svelte';
 	import NowBlock from './blocks/NowBlock.svelte';
 
 	type Props = {
 		posts: Post[];
+		logs: Post[];
 		categories: string[];
 		tracks: Track[];
 		musicError: string | null;
 	};
 
-	let { posts, categories, tracks, musicError }: Props = $props();
+	let { posts, logs, categories, tracks, musicError }: Props = $props();
 </script>
 
 <div class="flex min-h-screen flex-col gap-6 p-6">
@@ -27,6 +29,10 @@
 
 	<div class="border border-current p-4">
 		<WritingsBlock {posts} />
+	</div>
+
+	<div class="border border-current p-4">
+		<LogsBlock posts={logs} />
 	</div>
 
 	<div class="border border-current p-4">

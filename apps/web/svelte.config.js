@@ -10,7 +10,9 @@ const config = {
 
 	kit: {
         adapter: adapter(),
-
+        env: {
+            dir: '../..'
+        },
         alias: {
             "content-collections": "./.content-collections/generated"
         }

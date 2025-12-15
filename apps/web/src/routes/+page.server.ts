@@ -1,5 +1,5 @@
 import { LASTFM_API_KEY, LASTFM_USERNAME } from '$env/static/private';
-import { allPosts } from 'content-collections';
+import { allPosts, allLogs } from 'content-collections';
 import type { PageServerLoad } from './$types';
 
 interface LastFmTrack {
@@ -122,11 +122,16 @@ export const load: PageServerLoad = async ({ fetch }) => {
 		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 	const categories = [...new Set(allPosts.flatMap((post) => post.categories))].sort();
 
+	// Load logs
+	const logs = allLogs
+		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
 	// Load music tracks
 	const { tracks, error: musicError } = await fetchMusicTracks(fetch);
 
 	return {
 		posts,
+		logs,
 		categories,
 		tracks,
 		musicError

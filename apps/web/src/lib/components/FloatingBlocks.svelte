@@ -4,17 +4,19 @@
 	import AboutBlock from './blocks/AboutBlock.svelte';
 	import MusicBlock from './blocks/MusicBlock.svelte';
 	import WritingsBlock from './blocks/WritingsBlock.svelte';
+	import LogsBlock from './blocks/LogsBlock.svelte';
 	import BeforeBlock from './blocks/BeforeBlock.svelte';
 	import NowBlock from './blocks/NowBlock.svelte';
 
 	type Props = {
 		posts: Post[];
+		logs: Post[];
 		categories: string[];
 		tracks: Track[];
 		musicError: string | null;
 	};
 
-	let { posts, categories, tracks, musicError }: Props = $props();
+	let { posts, logs, categories, tracks, musicError }: Props = $props();
 
 	const MAX_WIDTH = 320;
 
@@ -22,6 +24,7 @@
 		{ id: 'about', label: 'about' },
 		{ id: 'music', label: 'music' },
 		{ id: 'writings', label: 'writings' },
+		{ id: 'logs', label: 'logs' },
 		{ id: 'now', label: 'now' },
 		{ id: 'before', label: 'before' }
 	];
@@ -100,6 +103,8 @@
 				<MusicBlock {tracks} error={musicError} interactive={false} />
 			{:else if config.id === 'writings'}
 				<WritingsBlock {posts} interactive={false} />
+			{:else if config.id === 'logs'}
+				<LogsBlock posts={logs} interactive={false} />
 			{:else if config.id === 'now'}
 				<NowBlock />
 			{:else if config.id === 'before'}
@@ -127,6 +132,8 @@
 				<MusicBlock {tracks} error={musicError} />
 			{:else if config.id === 'writings'}
 				<WritingsBlock {posts} />
+			{:else if config.id === 'logs'}
+				<LogsBlock posts={logs} />
 			{:else if config.id === 'now'}
 				<NowBlock />
 			{:else if config.id === 'before'}

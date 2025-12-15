@@ -26,6 +26,27 @@ const posts = defineCollection({
   },
 });
 
+const logs = defineCollection({
+  name: "logs",
+  directory: "content/logs",
+  include: "*.md",
+  schema: z.object({
+    title: z.string(),
+    summary: z.string(),
+    date: z.coerce.date(),
+    author: z.string(),
+    categories: z.array(z.string()).default([]),
+  }),
+  transform: async (document, context) => {
+    const html = await compileMarkdown(context, document);
+    return {
+      ...document,
+      html,
+      slug: document._meta.path,
+    };
+  },
+});
+
 export default defineConfig({
-  collections: [posts],
+  collections: [posts, logs],
 });
