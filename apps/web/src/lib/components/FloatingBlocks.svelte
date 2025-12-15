@@ -4,7 +4,8 @@
 	import AboutBlock from './blocks/AboutBlock.svelte';
 	import MusicBlock from './blocks/MusicBlock.svelte';
 	import WritingsBlock from './blocks/WritingsBlock.svelte';
-	import HistoryBlock from './blocks/HistoryBlock.svelte';
+	import BeforeBlock from './blocks/BeforeBlock.svelte';
+	import NowBlock from './blocks/NowBlock.svelte';
 
 	type Props = {
 		posts: Post[];
@@ -21,7 +22,8 @@
 		{ id: 'about', label: 'about' },
 		{ id: 'music', label: 'music' },
 		{ id: 'writings', label: 'writings' },
-		{ id: 'history', label: 'history' }
+		{ id: 'now', label: 'now' },
+		{ id: 'before', label: 'before' }
 	];
 
 	let positions = $state<{ x: number; y: number }[]>([]);
@@ -98,8 +100,10 @@
 				<MusicBlock {tracks} error={musicError} interactive={false} />
 			{:else if config.id === 'writings'}
 				<WritingsBlock {posts} interactive={false} />
-			{:else if config.id === 'history'}
-				<HistoryBlock />
+			{:else if config.id === 'now'}
+				<NowBlock />
+			{:else if config.id === 'before'}
+				<BeforeBlock />
 			{/if}
 		</div>
 	{/each}
@@ -123,8 +127,10 @@
 				<MusicBlock {tracks} error={musicError} />
 			{:else if config.id === 'writings'}
 				<WritingsBlock {posts} />
-			{:else if config.id === 'history'}
-				<HistoryBlock />
+			{:else if config.id === 'now'}
+				<NowBlock />
+			{:else if config.id === 'before'}
+				<BeforeBlock />
 			{/if}
 		</div>
 	{/each}

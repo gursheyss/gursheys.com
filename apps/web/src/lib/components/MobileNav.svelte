@@ -3,7 +3,8 @@
 	import AboutBlock from './blocks/AboutBlock.svelte';
 	import MusicBlock from './blocks/MusicBlock.svelte';
 	import WritingsBlock from './blocks/WritingsBlock.svelte';
-	import HistoryBlock from './blocks/HistoryBlock.svelte';
+	import BeforeBlock from './blocks/BeforeBlock.svelte';
+	import NowBlock from './blocks/NowBlock.svelte';
 
 	type Props = {
 		posts: Post[];
@@ -29,6 +30,10 @@
 	</div>
 
 	<div class="border border-current p-4">
-		<HistoryBlock />
+		<NowBlock />
+	</div>
+
+	<div class="border border-current p-4">
+		<BeforeBlock />
 	</div>
 </div>
