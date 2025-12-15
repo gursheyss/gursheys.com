@@ -1,20 +1,19 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
-
-	type Post = {
-		title: string;
-		slug: string;
-		date: Date;
-		summary: string;
-		categories: string[];
-	};
+	import type { Post, Track } from '$lib/types';
+	import AboutBlock from './blocks/AboutBlock.svelte';
+	import MusicBlock from './blocks/MusicBlock.svelte';
+	import WritingsBlock from './blocks/WritingsBlock.svelte';
+	import HistoryBlock from './blocks/HistoryBlock.svelte';
 
 	type Props = {
 		posts: Post[];
 		categories: string[];
+		tracks: Track[];
+		musicError: string | null;
 	};
 
-	let { posts, categories }: Props = $props();
+	let { posts, categories, tracks, musicError }: Props = $props();
 
 	const MAX_WIDTH = 320;
 
@@ -42,7 +41,6 @@
 		const vw = window.innerWidth;
 		const vh = window.innerHeight;
 
-		// Measure sizes
 		const measured = measureRefs.map((el) => {
 			if (el) {
 				const rect = el.getBoundingClientRect();
@@ -52,7 +50,6 @@
 		});
 		sizes = measured;
 
-		// Place blocks randomly without overlap
 		const padding = 40;
 		const placed: { x: number; y: number; w: number; h: number }[] = [];
 
@@ -74,7 +71,6 @@
 	onMount(() => {
 		init();
 
-		// Debounce resize to avoid spam updates
 		let resizeTimeout: ReturnType<typeof setTimeout>;
 		const onResize = () => {
 			clearTimeout(resizeTimeout);
@@ -97,25 +93,13 @@
 	{#each blockConfigs as config, i}
 		<div bind:this={measureRefs[i]} class="border border-current bg-white p-4 inline-block" style="max-width: {MAX_WIDTH}px;">
 			{#if config.id === 'about'}
-				<h2 class="mb-2 font-semibold">[about]</h2>
-				<p>hi! i'm gursh. welcome to my corner of the internet.</p>
+				<AboutBlock />
 			{:else if config.id === 'music'}
-				<h2 class="mb-2 font-semibold">[music]</h2>
-				<p class="text-sm text-gray-600">coming soon...</p>
+				<MusicBlock {tracks} error={musicError} interactive={false} />
 			{:else if config.id === 'writings'}
-				<div class="mb-2 font-semibold">[writings]</div>
-				<ul class="space-y-2">
-					{#each posts as post}
-						<li>
-							<span class="text-sm font-medium">{post.title}</span>
-							<span class="block text-xs text-gray-500">{post.date.toLocaleDateString()}</span>
-						</li>
-					{/each}
-				</ul>
-				<span class="mt-2 block text-sm text-gray-600">view all →</span>
+				<WritingsBlock {posts} interactive={false} />
 			{:else if config.id === 'history'}
-				<h2 class="mb-2 font-semibold">[history]</h2>
-				<p class="text-sm text-gray-600">coming soon...</p>
+				<HistoryBlock />
 			{/if}
 		</div>
 	{/each}
@@ -134,27 +118,13 @@
 			aria-label={config.label}
 		>
 			{#if config.id === 'about'}
-				<h2 class="mb-2 font-semibold">[about]</h2>
-				<p>hi! i'm gursh. welcome to my corner of the internet.</p>
+				<AboutBlock />
 			{:else if config.id === 'music'}
-				<h2 class="mb-2 font-semibold">[music]</h2>
-				<p class="text-sm text-gray-600">coming soon...</p>
+				<MusicBlock {tracks} error={musicError} />
 			{:else if config.id === 'writings'}
-				<a href="/writings" class="mb-2 block font-semibold hover:underline">[writings]</a>
-				<ul class="space-y-2">
-					{#each posts as post}
-						<li>
-							<a href="/writings/{post.slug}" class="block hover:underline">
-								<span class="text-sm font-medium">{post.title}</span>
-								<span class="block text-xs text-gray-500">{post.date.toLocaleDateString()}</span>
-							</a>
-						</li>
-					{/each}
-				</ul>
-				<a href="/writings" class="mt-2 block text-sm text-gray-600 hover:underline">view all →</a>
+				<WritingsBlock {posts} />
 			{:else if config.id === 'history'}
-				<h2 class="mb-2 font-semibold">[history]</h2>
-				<p class="text-sm text-gray-600">coming soon...</p>
+				<HistoryBlock />
 			{/if}
 		</div>
 	{/each}

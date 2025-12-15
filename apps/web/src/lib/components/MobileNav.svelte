@@ -1,54 +1,34 @@
 <script lang="ts">
-	type Post = {
-		title: string;
-		slug: string;
-		date: Date;
-		summary: string;
-		categories: string[];
-	};
+	import type { Post, Track } from '$lib/types';
+	import AboutBlock from './blocks/AboutBlock.svelte';
+	import MusicBlock from './blocks/MusicBlock.svelte';
+	import WritingsBlock from './blocks/WritingsBlock.svelte';
+	import HistoryBlock from './blocks/HistoryBlock.svelte';
 
 	type Props = {
 		posts: Post[];
 		categories: string[];
+		tracks: Track[];
+		musicError: string | null;
 	};
 
-	let { posts, categories }: Props = $props();
+	let { posts, categories, tracks, musicError }: Props = $props();
 </script>
 
 <div class="flex min-h-screen flex-col gap-6 p-6">
-	<!-- About -->
 	<div class="border border-current p-4">
-		<h2 class="mb-2 font-semibold">[about]</h2>
-		<p>hi! i'm gursh. welcome to my corner of the internet.</p>
+		<AboutBlock />
 	</div>
 
-	<!-- Music -->
 	<div class="border border-current p-4">
-		<h2 class="mb-2 font-semibold">[music]</h2>
-		<p class="text-sm text-gray-600">coming soon...</p>
+		<MusicBlock {tracks} error={musicError} imageSize="md" maxHeight="max-h-64" />
 	</div>
 
-	<!-- Writings -->
 	<div class="border border-current p-4">
-		<a href="/writings" class="mb-2 block font-semibold hover:underline">[writings]</a>
-		<ul class="space-y-2">
-			{#each posts as post}
-				<li>
-					<a href="/writings/{post.slug}" class="block hover:underline">
-						<span class="text-sm font-medium">{post.title}</span>
-						<span class="block text-xs text-gray-500">{post.date.toLocaleDateString()}</span>
-					</a>
-				</li>
-			{/each}
-		</ul>
-		{#if posts.length > 0}
-			<a href="/writings" class="mt-2 block text-sm text-gray-600 hover:underline">view all →</a>
-		{/if}
+		<WritingsBlock {posts} />
 	</div>
 
-	<!-- History -->
 	<div class="border border-current p-4">
-		<h2 class="mb-2 font-semibold">[history]</h2>
-		<p class="text-sm text-gray-600">coming soon...</p>
+		<HistoryBlock />
 	</div>
 </div>

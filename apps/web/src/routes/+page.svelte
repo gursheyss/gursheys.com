@@ -28,8 +28,18 @@
 
 {#if mounted}
 	{#if isDesktop}
-		<FloatingBlocks posts={data.posts} categories={data.categories} />
+		<FloatingBlocks
+			posts={data.posts}
+			categories={data.categories}
+			tracks={data.tracks}
+			musicError={data.musicError}
+		/>
 	{:else}
-		<MobileNav posts={data.posts} categories={data.categories} />
+		<MobileNav
+			posts={data.posts}
+			categories={data.categories}
+			tracks={data.tracks}
+			musicError={data.musicError}
+		/>
 	{/if}
 {/if}

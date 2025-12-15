@@ -1,16 +1,11 @@
 <script lang="ts">
-	import type { PageProps } from './$types';
+	import type { PageProps } from "./$types";
 
 	let { data }: PageProps = $props();
 </script>
 
 <div>
-	<nav>
-		<a href="/">[about]</a>
-		<a href="/music">[music]</a>
-		<a href="/writings">[writings]</a>
-		<a href="/history">[history]</a>
-	</nav>
+	<a href="/" class="text-sm text-gray-600 hover:underline">&larr; back</a>
 
 	<article class="mt-6">
 		<header>
@@ -23,6 +18,4 @@
 			{@html data.post.html}
 		</div>
 	</article>
-
-	<a href="/writings" class="block mt-8">&larr; back to writings</a>
 </div>
