@@ -1,9 +1,10 @@
 ## Monorepo
 
 Turborepo + bun workspaces. Apps in `apps/`, shared packages in `packages/`.
-- Main app: `apps/web` (`@gursheys/web`)
+- Web app: `apps/web` (`@gursheys/web`) - Svelte frontend
+- Worker app: `apps/worker` (`@gursheys/worker`) - Effect-based CLI/worker
 - Run from root: `bun run dev`, `bun run build`, `bun run check`
-- Add deps to app: `cd apps/web && bun add <pkg>`
+- Add deps to app: `cd apps/<app> && bun add <pkg>`
 - Internal deps: `"@gursheys/pkg": "workspace:*"`
 
 ---
@@ -13,6 +14,29 @@ Always use `bun` for package management:
 - `bun run <script>` (not npm run/yarn/pnpm run)
 - `bunx` (not npx)
 - Prefer `bun typecheck` over running `tsc` directly as it uses TypeScript Go and is faster
+
+---
+
+## Effect Best Practices
+
+The `apps/worker` package is built with [Effect](https://effect.website) for robust, composable CLI/worker logic.
+
+Before implementing Effect features, run `bunx effect-solutions list` and read the relevant guide:
+- **quick-start**: Get started with Effect
+- **project-setup**: Language service and development setup
+- **basics**: Effect.fn and Effect.gen conventions
+- **services-and-layers**: Context.Tag and Layer patterns for DI
+- **data-modeling**: Records, variants, brands, pattern matching
+- **error-handling**: Schema.TaggedError, pattern matching, defects
+- **config**: Effect Config usage and layer patterns
+- **cli**: @effect/cli for building command-line interfaces
+
+**Effect Source Reference:** Clone the Effect repository to `~/.local/share/effect-solutions/effect` for exploring implementation details, API usage patterns, and real-world examples when documentation isn't enough.
+
+To clone:
+```bash
+git clone https://github.com/Effect-TS/effect.git ~/.local/share/effect-solutions/effect
+```
 
 You are able to use the Svelte MCP server, where you have access to comprehensive Svelte 5 and SvelteKit documentation. Here's how to use the available tools effectively:
 

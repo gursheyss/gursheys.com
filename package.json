@@ -10,6 +10,7 @@
 		"preview": "turbo run preview"
 	},
 	"devDependencies": {
+		"effect-solutions": "^0.4.13",
 		"turbo": "^2.3.0"
 	}
 }

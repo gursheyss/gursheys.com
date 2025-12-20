@@ -1,0 +1,24 @@
+{
+  "name": "@gursheys/worker",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "bun run index.ts",
+    "check": "tsc --noEmit",
+    "prepare": "effect-language-service patch"
+  },
+  "dependencies": {
+    "@effect/cli": "^0.73.0",
+    "@effect/platform": "^0.94.0",
+    "effect": "^3.19.13"
+  },
+  "devDependencies": {
+    "@effect/language-service": "^0.62.4",
+    "@types/bun": "latest",
+    "typescript": "^5.9.3"
+  }
+}
